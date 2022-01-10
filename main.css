@@ -1,0 +1,7 @@
+h2 {
+    display: flexbox;
+    width: 100vw;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+}
