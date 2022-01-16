@@ -9,21 +9,49 @@
     <link rel="stylesheet" href="main.css">
 
     <style>
-    h2 {
-    display: flexbox;
-    width: 100vw;
-    height: 40px;
-    justify-content: center;
-    align-items: center;
-}
+    body {
+        margin: 0px
+    }
+    
+    .heading-wrapper {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .content-wrapper {
+        display: grid;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .footer-wrapper {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
     </style>
 </head>
 <body>
-    <div class="headingWrapper">
+    <div class="heading-wrapper">
         <div class="heading">
             <h2>Welcome to the Bottega Casino!</h2>
             <h3>Please use the console to play the game and see results of your winnings...</h3>
         </div>
+    </div>
+    <div class="content-wrapper">
+        <div class="slot-machine-heading">
+            <h2>This is where the slot machine heading goes</h2>
+        </div>
+        <div class="slot-machine">
+            <h2>This is where the slot machine goes</h2>
+        </div>
+        <div class="slot-machine-end-results">
+            <h2>This is where the slot machine results go</h2>
+        </div>
+    </div>
+    <div class="footer-wrapper">
+        <h1>This is where the footer is with Bottega Logo.</h1>
     </div>
 </body>
 <script>
