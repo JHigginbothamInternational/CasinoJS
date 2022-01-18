@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CasinoJS</title>
 
-    <link rel="stylesheet" href="main.css">
-
     <style>
     body {
         margin: 0px
@@ -25,6 +23,16 @@
         text-align: center;
     }
 
+    #walletHeading {
+        font-size: 2em;
+        font-style: bold;
+    }
+
+    .content-wrapper > .machine {
+        display: grid;
+        grid-template-rows: 2em;
+    }
+
     .footer-wrapper {
         display: flex;
         justify-content: center;
@@ -35,19 +43,23 @@
 <body>
     <div class="heading-wrapper">
         <div class="heading">
-            <h2>Welcome to the Bottega Casino!</h2>
-            <h3>Please use the console to play the game and see results of your winnings...</h3>
+            <h1>Welcome to the Bottega Casino!</h1>
+            <h2>This is the number guessing game.  Guess a number 1 through 1000.</h2>
+            <h3>The rules are simple... Guess the correct number to get the jackpot.  Closer you are the more money you get.  The further the less.</h3>
+            <h4>Good luck!</h4>
         </div>
     </div>
     <div class="content-wrapper">
-        <div class="slot-machine-heading">
-            <h2>This is where the slot machine heading goes</h2>
+        <div class="machine-heading">
+            <p id=walletHeading></p>
         </div>
-        <div class="slot-machine">
-            <h2>This is where the slot machine goes</h2>
+        <div class="machine">
+            <input id="prompt"></input> <br>
+            <button onclick="saveAnswer()">Submit Number!!</button>
+            <p id=user-value></p>
         </div>
-        <div class="slot-machine-end-results">
-            <h2>This is where the slot machine results go</h2>
+        <div class="machine-end-results">            
+            <p id=machine-value></p>           
         </div>
     </div>
     <div class="footer-wrapper">
@@ -55,6 +67,33 @@
     </div>
 </body>
 <script>
+    let walletAmount = 100;
+
+    const walletSentence = `Wallet: $${walletAmount}.`
+
+    document.getElementById("walletHeading").innerHTML = walletSentence;
     
+    let randomNumber = Math.floor(Math.random(1) * 1000);
+
+    function saveAnswer() {
+        let userValue = document.getElementById("prompt").value;
+        return document.getElementById("user-value").innerHTML = userValue;
+    }
+
+    let lottery = () => {     
+        if (randomNumber === 1) {
+            return 'Jackpot!';}
+        if (randomNumber > 1 && randomNumber <= 100) {
+            return 'Short Pay!'}
+        if (randomNumber > 100 && randomNumber <= 250) {
+            return 'Bonus Spin!'}
+        if (randomNumber > 250 && randomNumber <= 400) {
+            return 'Scatter!'}
+        if (randomNumber > 400 && randomNumber <= 550) {
+            return 'Taste!'}
+        if (randomNumber > 550) {
+            return 'You lose!'}  
+            
+}
 </script>
 </html>
