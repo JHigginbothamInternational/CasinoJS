@@ -10,17 +10,30 @@
     body {
         margin: 0px
     }
+
+    #spacer1 {
+        height: 15px;
+    }
+
+    #spacer2 {
+        height: 30px;
+    }
     
     .heading-wrapper {
         display: flex;
+        height: 200px;
+        background-color: black;
+        color: white;
         justify-content: center;
         text-align: center;
     }
 
     .content-wrapper {
         display: grid;
+        height: 500px;
         justify-content: center;
         text-align: center;
+        align-items: center;
     }
 
     #walletHeading {
@@ -31,12 +44,38 @@
     .content-wrapper > .machine {
         display: grid;
         grid-template-rows: 2em;
+        align-items: center;
+        width: 200px;
+        height: 200px;
+    }
+
+    input {
+        height: 40px;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    #prompt {
+        height: 50px;
+        width: 200px;
+    }
+
+    #mybtn {
+        height: 50px;
+        width: 200px;
     }
 
     .footer-wrapper {
         display: flex;
+        background-color: black;
+        height: 200px;
         justify-content: center;
+        align-items: center;
         text-align: center;
+    }
+
+    .footer-wrapper > img {
+        height: 200px;
     }
     </style>
 </head>
@@ -50,50 +89,110 @@
         </div>
     </div>
     <div class="content-wrapper">
-        <div class="machine-heading">
-            <p id=walletHeading></p>
+        <div class="left-content">
+
         </div>
-        <div class="machine">
-            <input id="prompt"></input> <br>
-            <button onclick="saveAnswer()">Submit Number!!</button>
-            <p id=user-value></p>
+        <div class="the-machine">
+            <div class="machine-heading">
+                <p id=walletHeading></p>
+            </div>
+            <div class="machine">
+                <input id="prompt"></input> <br>
+                <div id=spacer1></div>
+                <button id="mybtn" onclick="theMachine()">Submit Number!!</button>
+                <p id=user-value></p>
+            </div>
+            <div class="machine-end-results">            
+                <div></div>
+                <div id=machine-value></div>
+                <div id=spacer2></div>
+                <div id=machine-results></div>           
+            </div>
         </div>
-        <div class="machine-end-results">            
-            <p id=machine-value></p>           
+        <div class="right-content">
+
         </div>
     </div>
     <div class="footer-wrapper">
-        <h1>This is where the footer is with Bottega Logo.</h1>
+        <img src="./images/Bottega_University_formerly_New_Charter_University_Online_20_sm.png" alt="">
     </div>
 </body>
 <script>
     let walletAmount = 100;
 
-    const walletSentence = `Wallet: $${walletAmount}.`
+    let walletSentence = `Wallet: $${walletAmount}.`
 
     document.getElementById("walletHeading").innerHTML = walletSentence;
     
-    let randomNumber = Math.floor(Math.random(1) * 1000);
-
-    function saveAnswer() {
+    function theMachine() {
+        walletAmount += (-25);
         let userValue = document.getElementById("prompt").value;
-        return document.getElementById("user-value").innerHTML = userValue;
-    }
+        document.getElementById("user-value").innerHTML = userValue;
+        document.getElementById("user-value").style.fontSize = "50px";
+        let randomNumber = Math.floor(Math.random(1) * 1000);
+        document.getElementById("machine-value").innerHTML = randomNumber;
+        document.getElementById("machine-value").style.fontSize = "50px";
 
-    let lottery = () => {     
-        if (randomNumber === 1) {
-            return 'Jackpot!';}
-        if (randomNumber > 1 && randomNumber <= 100) {
-            return 'Short Pay!'}
-        if (randomNumber > 100 && randomNumber <= 250) {
-            return 'Bonus Spin!'}
-        if (randomNumber > 250 && randomNumber <= 400) {
-            return 'Scatter!'}
-        if (randomNumber > 400 && randomNumber <= 550) {
-            return 'Taste!'}
-        if (randomNumber > 550) {
-            return 'You lose!'}  
-            
-}
+        if ((randomNumber === userValue) && (walletAmount >= 25)) {
+            walletAmount += 1000
+            document.getElementById("user-value").style.color = "green";
+            document.getElementById("machine-value").style.color = "green";
+            let jackpot = "Well done.  You've hit the Jackpot!"
+            document.getElementById("machine-results").innerHTML = jackpot;
+            walletSentence = `Wallet: $${walletAmount}.`
+            return document.getElementById("walletHeading").innerHTML = walletSentence;
+        } else if (((randomNumber < userValue || randomNumber > userValue) && (walletAmount >= 25)) && (Math.abs(randomNumber - userValue) <= 100)) {
+            walletAmount += 75
+            document.getElementById("user-value").style.color = "crimson";
+            document.getElementById("machine-value").style.color = "blue";
+            let shortPay = "Short payday!"
+            document.getElementById("machine-results").innerHTML = shortPay;
+            walletSentence = `Wallet: $${walletAmount}.`
+            return document.getElementById("walletHeading").innerHTML = walletSentence;
+        } else if (((randomNumber < userValue || randomNumber > userValue) && (walletAmount >= 25)) && ((Math.abs(randomNumber - userValue) >= 101) && (Math.abs(randomNumber - userValue) <= 200))) {
+            walletAmount += 50
+            document.getElementById("user-value").style.color = "crimson";
+            document.getElementById("machine-value").style.color = "blue";
+            let shorterPay = "Shorter payday!"
+            document.getElementById("machine-results").innerHTML = shorterPay;
+            walletSentence = `Wallet: $${walletAmount}.`
+            return document.getElementById("walletHeading").innerHTML = walletSentence;
+        } else if (((randomNumber < userValue || randomNumber > userValue) && (walletAmount >= 25)) && ((Math.abs(randomNumber - userValue) >= 201) && (Math.abs(randomNumber - userValue) <= 300))) {
+            walletAmount += 25
+            document.getElementById("user-value").style.color = "crimson";
+            document.getElementById("machine-value").style.color = "blue";
+            let highFive = "High five! Good times!"
+            document.getElementById("machine-results").innerHTML = highFive;
+            walletSentence = `Wallet: $${walletAmount}.`
+            return document.getElementById("walletHeading").innerHTML = walletSentence;
+        } else if (((randomNumber < userValue || randomNumber > userValue) && (walletAmount >= 25)) && ((Math.abs(randomNumber - userValue) >= 301) && (Math.abs(randomNumber - userValue) <= 400))) {
+            walletAmount += 5
+            document.getElementById("user-value").style.color = "crimson";
+            document.getElementById("machine-value").style.color = "blue";
+            let penny = "Penny for your thoughts!"
+            document.getElementById("machine-results").innerHTML = penny;
+            walletSentence = `Wallet: $${walletAmount}.`
+            return document.getElementById("walletHeading").innerHTML = walletSentence;
+        } else if (((randomNumber < userValue || randomNumber > userValue) && (walletAmount >= 25)) && (Math.abs(randomNumber - userValue) >= 401)) {
+            walletAmount += 0
+            document.getElementById("user-value").style.color = "crimson";
+            document.getElementById("machine-value").style.color = "crimson";
+            let loser = "Sorry you lose."
+            document.getElementById("machine-results").innerHTML = loser;
+            walletSentence = `Wallet: $${walletAmount}.`
+            return document.getElementById("walletHeading").innerHTML = walletSentence;
+        } else if (walletAmount < 25) {
+            walletAmount += 0
+            walletSentence = `Wallet: $${walletAmount}.`
+            document.getElementById("user-value").style.color = "crimson";
+            document.getElementById("machine-value").style.color = "crimson";
+            document.getElementById("walletHeading").innerHTML = walletSentence;
+            document.getElementById("mybtn").disabled = true;
+            let broke = "Card declined... Better luck next time. Refresh page to play again!"
+            return document.getElementById("machine-results").innerHTML = broke;
+        } else {
+            alert("An error has occurred. Try again.")
+        }    
+    }
 </script>
 </html>
